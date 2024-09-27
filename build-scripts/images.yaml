@@ -1,0 +1,42 @@
+images:
+  - name1: ubuntu
+    name2: noble
+    base: ubuntu:24.04
+    bg: bg_noble.png
+    distro: ubuntu
+    dockerfile: dockerfile-kasm-core
+
+  - name1: debian
+    name2: bookworm
+    base: debian:bookworm-slim
+    bg: bg_debian.svg
+    distro: debian
+    dockerfile: dockerfile-kasm-core
+
+  - name1: rockylinux
+    name2: 9
+    base: rockylinux:9
+    bg: bg_rocky.png
+    distro: rockylinux9
+    dockerfile: dockerfile-kasm-core-oracle
+
+  - name1: almalinux
+    name2: 9
+    base: almalinux:9
+    bg: bg_almalinux.png
+    distro: almalinux9
+    dockerfile: dockerfile-kasm-core-oracle
+
+  - name1: fedora
+    name2: 40
+    base: fedora:40
+    bg: bg_fedora.png
+    distro: fedora40
+    dockerfile: dockerfile-kasm-core-fedora
+
+  - name1: alpine
+    name2: 320
+    base: alpine:3.20
+    bg: bg_alpine.png
+    distro: alpine
+    dockerfile: dockerfile-kasm-core-alpine

@@ -35,7 +35,8 @@ ENV DISTRO=$DISTRO \
     LANGUAGE=$LANGUAGE \
     LC_ALL=$LC_ALL \
     TZ=$TZ \
-    STARTUPDIR=/dockerstartup
+    STARTUPDIR=/dockerstartup \
+    KASM_USER_PASSWORD=${KASM_USER_PASSWORD:-12341234gst}
 
 ### Home setup
 WORKDIR $HOME
@@ -177,6 +178,10 @@ RUN touch $STARTUPDIR/wm.log \
     && chown 1000:1000 $STARTUPDIR/kasmrx/Downloads \
     && chown -R root:root /usr/local/bin \
     && chown 1000:root /var/run/pulse
+
+### Set password for kasm-user and allow sudo without password
+RUN echo "kasm-user:${KASM_USER_PASSWORD}" | chpasswd && \
+    echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 ### Language Packs
 COPY ./src/ubuntu/install/langpacks $INST_SCRIPTS/langpacks/
