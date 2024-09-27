@@ -1,0 +1,7 @@
+images:
+  - name1: debian
+    name2: bookworm
+    base: debian:bookworm-slim
+    bg: bg_debian.svg
+    distro: debian
+    dockerfile: dockerfile-kasm-core
