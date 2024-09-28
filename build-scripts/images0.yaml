@@ -7,7 +7,7 @@ images:
     dockerfile: dockerfile-kasm-core
 
   - name1: fedora
-    name2: 40
+    name2: "40"
     base: fedora:40
     bg: bg_fedora.png
     distro: fedora40
