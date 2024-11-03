@@ -15,9 +15,11 @@ elif [ "${DISTRO}" == "oracle8" ]; then
   dnf config-manager --set-enabled ol8_codeready_builder
   dnf localinstall -y --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
   dnf install -y ffmpeg pulseaudio-utils
-elif [ "${DISTRO}" == "oracle9" ]; then
-  dnf install -y curl git
-  dnf config-manager --set-enabled ol9_codeready_builder
+elif [[ "${DISTRO}" == @(oracle9|rhel9) ]]; then
+  dnf install -y --allowerasing curl git
+  if [[ "${DISTRO}" == "oracle9" ]]; then
+    dnf config-manager --set-enabled ol9_codeready_builder
+  fi
   dnf localinstall -y --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm
   dnf install -y --allowerasing ffmpeg pulseaudio-utils pulseaudio
 elif [[ "${DISTRO}" == @(rockylinux9|almalinux9) ]]; then 

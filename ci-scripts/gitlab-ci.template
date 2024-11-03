@@ -18,7 +18,7 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 before_script:
   - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
-  - export SANITIZED_BRANCH="$(echo $CI_COMMIT_REF_NAME | sed -r 's#^release/##' | sed 's/\//_/g')"
+  - export SANITIZED_BRANCH="$(echo ${CI_COMMIT_REF_NAME:0:64} | sed -r 's#^release/##' | sed 's/\//_/g')"
 
 ###############################################
 # Build Containers and push to cache endpoint #
@@ -143,6 +143,10 @@ scan_{{ IMAGE.name1 }}_{{ IMAGE.name2 }}:
       {% for FILE in files %}- {{ FILE }}
       {% endfor %}{% for FILE in IMAGE.changeFiles %}- {{ FILE }}
       {% endfor %}{% endif %}
+  except:
+    variables:
+      - $README_USERNAME
+      - $README_PASSWORD
   needs:
     - build_{{ IMAGE.name1 }}_{{ IMAGE.name2 }}
   tags:
@@ -169,6 +173,10 @@ scan_{{ IMAGE.name1 }}_{{ IMAGE.name2 }}:
       {% for FILE in files %}- {{ FILE }}
       {% endfor %}{% for FILE in IMAGE.changeFiles %}- {{ FILE }}
       {% endfor %}{% endif %}
+  except:
+    variables:
+      - $README_USERNAME
+      - $README_PASSWORD
   needs:
     - build_{{ IMAGE.name1 }}_{{ IMAGE.name2 }}
   artifacts:
